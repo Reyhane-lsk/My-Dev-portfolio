@@ -6,9 +6,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize all functionality
     initNavigation();
     initScrollAnimations();
+    initFadeInOutScroll();
     initLazyLoading();
     initSkillBars();
     initContactForm();
+    initDragAndDrop();
+    initStorytelling();
+    initHorizontalScrollSkills();
     initPerformanceOptimizations();
 });
 
@@ -88,6 +92,48 @@ function initNavigation() {
     });
 }
 
+// Smooth Fade In/Out Scroll Animations
+function initFadeInOutScroll() {
+    const fadeElements = document.querySelectorAll('.fade-in, .story-paragraph, .project-card, .stat-item, .contact-item, .skill-item, .smooth-reveal');
+    
+    const observerOptions = {
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const fadeObserver = new IntersectionObserver(function(entries) {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                // Smooth staggered animation with easing
+                const delay = index * 150;
+                setTimeout(() => {
+                    entry.target.classList.add('visible');
+                    entry.target.classList.add('revealed');
+                    if (entry.target.classList.contains('fade-out')) {
+                        entry.target.classList.remove('hidden');
+                    }
+                    // Add smooth animation class
+                    entry.target.style.willChange = 'auto';
+                }, delay);
+                
+                // Don't observe again once animated
+                fadeObserver.unobserve(entry.target);
+            } else {
+                // Smooth fade out when leaving viewport
+                if (entry.target.classList.contains('fade-out')) {
+                    entry.target.classList.add('hidden');
+                }
+            }
+        });
+    }, observerOptions);
+
+    fadeElements.forEach((el, index) => {
+        // Set initial will-change for performance
+        el.style.willChange = 'opacity, transform';
+        fadeObserver.observe(el);
+    });
+}
+
 // Scroll animations and intersection observer
 function initScrollAnimations() {
     // Intersection Observer for animations
@@ -118,15 +164,157 @@ function initScrollAnimations() {
     const animatedElements = document.querySelectorAll('.project-card, .skill-progress, .stat-item, .contact-item');
     animatedElements.forEach(el => observer.observe(el));
 
-    // Parallax effect for hero section
-    window.addEventListener('scroll', function() {
+    // Smooth parallax effect for hero section
+    window.addEventListener('scroll', throttle(function() {
         const scrolled = window.pageYOffset;
         const parallaxElements = document.querySelectorAll('.floating-card');
         
         parallaxElements.forEach(element => {
-            const speed = 0.5;
-            element.style.transform = `translateY(${scrolled * speed}px)`;
+            const speed = 0.3;
+            const rotation = scrolled * 0.05;
+            element.style.transform = `translateY(${scrolled * speed}px) rotateY(${rotation}deg)`;
+            element.style.transition = 'transform 0.1s cubic-bezier(0.4, 0, 0.2, 1)';
         });
+    }, 16));
+}
+
+// Smooth storytelling scroll effects
+function initStorytelling() {
+    const storyParagraphs = document.querySelectorAll('.story-paragraph');
+    
+    const storyObserver = new IntersectionObserver(function(entries) {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                const delay = index * 400;
+                setTimeout(() => {
+                    const startTime = performance.now();
+                    const duration = 1200;
+                    
+                    function animate(currentTime) {
+                        const elapsed = currentTime - startTime;
+                        const progress = Math.min(elapsed / duration, 1);
+                        
+                        // Smooth easing
+                        const easeOutCubic = 1 - Math.pow(1 - progress, 3);
+                        const translateY = 30 * (1 - easeOutCubic);
+                        
+                        entry.target.style.opacity = easeOutCubic;
+                        entry.target.style.transform = `translateY(${translateY}px)`;
+                        
+                        if (progress < 1) {
+                            requestAnimationFrame(animate);
+                        } else {
+                            entry.target.classList.add('visible');
+                            entry.target.style.willChange = 'auto';
+                        }
+                    }
+                    
+                    entry.target.style.willChange = 'opacity, transform';
+                    requestAnimationFrame(animate);
+                }, delay);
+                
+                storyObserver.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.2,
+        rootMargin: '0px 0px -100px 0px'
+    });
+
+    storyParagraphs.forEach(paragraph => {
+        paragraph.style.willChange = 'opacity, transform';
+        storyObserver.observe(paragraph);
+    });
+}
+
+// Drag and Drop 3D Elements
+function initDragAndDrop() {
+    const draggableElements = document.querySelectorAll('.draggable-element');
+    const dropZone = document.getElementById('dropZone');
+    
+    if (!dropZone) return;
+
+    let draggedElement = null;
+
+    // Add drag event listeners to draggable elements
+    draggableElements.forEach(element => {
+        element.addEventListener('dragstart', function(e) {
+            draggedElement = this;
+            this.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/html', this.outerHTML);
+            
+            // Create a custom drag image with 3D effect
+            const dragImage = this.cloneNode(true);
+            dragImage.style.transform = 'rotateY(15deg) rotateX(15deg) scale(1.1)';
+            dragImage.style.opacity = '0.8';
+            document.body.appendChild(dragImage);
+            dragImage.style.position = 'absolute';
+            dragImage.style.top = '-1000px';
+            e.dataTransfer.setDragImage(dragImage, 0, 0);
+            setTimeout(() => document.body.removeChild(dragImage), 0);
+        });
+
+        element.addEventListener('dragend', function() {
+            this.classList.remove('dragging');
+            draggedElement = null;
+        });
+    });
+
+    // Drop zone events
+    dropZone.addEventListener('dragover', function(e) {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'move';
+        this.classList.add('drag-over');
+    });
+
+    dropZone.addEventListener('dragleave', function() {
+        this.classList.remove('drag-over');
+    });
+
+    dropZone.addEventListener('drop', function(e) {
+        e.preventDefault();
+        this.classList.remove('drag-over');
+
+        if (draggedElement) {
+            // Create a new element in the drop zone with 3D effect
+            const droppedElement = draggedElement.cloneNode(true);
+            droppedElement.classList.remove('draggable-element', 'dragging');
+            droppedElement.classList.add('dropped-element');
+            droppedElement.draggable = false;
+            
+            // Add remove functionality
+            droppedElement.addEventListener('click', function() {
+                this.style.animation = 'dropAnimation 0.5s ease reverse';
+                setTimeout(() => {
+                    if (this.parentNode) {
+                        this.parentNode.removeChild(this);
+                    }
+                }, 500);
+            });
+
+            // Add to drop zone with animation
+            this.appendChild(droppedElement);
+            
+            // Trigger 3D animation
+            setTimeout(() => {
+                droppedElement.style.transform = 'rotateY(0deg) rotateX(0deg) scale(1)';
+            }, 100);
+        }
+    });
+
+    // Make drop zone elements removable on click
+    dropZone.addEventListener('click', function(e) {
+        if (e.target.classList.contains('dropped-element') || 
+            e.target.closest('.dropped-element')) {
+            const element = e.target.closest('.dropped-element') || e.target;
+            element.style.animation = 'dropAnimation 0.5s ease reverse';
+            setTimeout(() => {
+                if (element.parentNode) {
+                    element.parentNode.removeChild(element);
+                }
+            }, 500);
+        }
     });
 }
 
@@ -166,6 +354,142 @@ function initLazyLoading() {
     lazyBgs.forEach(bg => bgObserver.observe(bg));
 }
 
+// Horizontal Scroll Skills with Fade In/Out
+function initHorizontalScrollSkills() {
+    const scrollContainer = document.querySelector('.skills-scroll-container');
+    const skillCards = document.querySelectorAll('.skill-card');
+    const leftIndicator = document.querySelector('.scroll-indicator-left');
+    const rightIndicator = document.querySelector('.scroll-indicator-right');
+    
+    if (!scrollContainer || skillCards.length === 0) return;
+    
+    // Initial fade in for visible cards
+    const observerOptions = {
+        root: scrollContainer,
+        rootMargin: '0px',
+        threshold: [0, 0.3, 0.7, 1]
+    };
+    
+    const cardObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            const card = entry.target;
+            const ratio = entry.intersectionRatio;
+            
+            // Fade in when entering viewport
+            if (ratio > 0.3) {
+                card.classList.remove('fade-out-hidden');
+                card.classList.add('fade-in-visible');
+                
+                // Animate skill bar when card is visible
+                const skillBar = card.querySelector('.skill-progress');
+                if (skillBar && skillBar.dataset.width) {
+                    animateSkillBar(skillBar);
+                }
+            } else if (ratio < 0.3 && ratio > 0) {
+                // Fade out when leaving viewport
+                card.classList.remove('fade-in-visible');
+                card.classList.add('fade-out-hidden');
+            }
+        });
+    }, observerOptions);
+    
+    // Observe all skill cards
+    skillCards.forEach(card => {
+        cardObserver.observe(card);
+        
+        // Initial check for visible cards
+        const cardRect = card.getBoundingClientRect();
+        const containerRect = scrollContainer.getBoundingClientRect();
+        if (cardRect.left < containerRect.right && cardRect.right > containerRect.left) {
+            card.classList.add('fade-in-visible');
+            const skillBar = card.querySelector('.skill-progress');
+            if (skillBar && skillBar.dataset.width) {
+                setTimeout(() => animateSkillBar(skillBar), 300);
+            }
+        }
+    });
+    
+    // Scroll indicators functionality
+    function updateScrollIndicators() {
+        const scrollLeft = scrollContainer.scrollLeft;
+        const scrollWidth = scrollContainer.scrollWidth;
+        const clientWidth = scrollContainer.clientWidth;
+        const maxScroll = scrollWidth - clientWidth;
+        
+        // Show/hide indicators based on scroll position
+        if (leftIndicator) {
+            leftIndicator.style.opacity = scrollLeft > 10 ? '1' : '0';
+            leftIndicator.style.pointerEvents = scrollLeft > 10 ? 'all' : 'none';
+        }
+        
+        if (rightIndicator) {
+            rightIndicator.style.opacity = scrollLeft < maxScroll - 10 ? '1' : '0';
+            rightIndicator.style.pointerEvents = scrollLeft < maxScroll - 10 ? 'all' : 'none';
+        }
+    }
+    
+    // Scroll left
+    if (leftIndicator) {
+        leftIndicator.addEventListener('click', function() {
+            scrollContainer.scrollBy({
+                left: -300,
+                behavior: 'smooth'
+            });
+        });
+    }
+    
+    // Scroll right
+    if (rightIndicator) {
+        rightIndicator.addEventListener('click', function() {
+            scrollContainer.scrollBy({
+                left: 300,
+                behavior: 'smooth'
+            });
+        });
+    }
+    
+    // Update indicators on scroll
+    scrollContainer.addEventListener('scroll', throttle(function() {
+        updateScrollIndicators();
+        
+        // Update fade in/out based on scroll position
+        skillCards.forEach((card, index) => {
+            const cardRect = card.getBoundingClientRect();
+            const containerRect = scrollContainer.getBoundingClientRect();
+            const cardCenter = cardRect.left + cardRect.width / 2;
+            const containerCenter = containerRect.left + containerRect.width / 2;
+            const distance = Math.abs(cardCenter - containerCenter);
+            const maxDistance = containerRect.width / 2 + cardRect.width / 2;
+            const visibility = 1 - (distance / maxDistance);
+            
+            if (visibility > 0.3) {
+                card.classList.remove('fade-out-hidden');
+                card.classList.add('fade-in-visible');
+                card.style.opacity = Math.max(0.3, visibility);
+            } else {
+                card.classList.remove('fade-in-visible');
+                card.classList.add('fade-out-hidden');
+                card.style.opacity = visibility;
+            }
+        });
+    }, 16));
+    
+    // Initial update
+    updateScrollIndicators();
+    
+    // Keyboard navigation
+    scrollContainer.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft') {
+            scrollContainer.scrollBy({ left: -300, behavior: 'smooth' });
+        } else if (e.key === 'ArrowRight') {
+            scrollContainer.scrollBy({ left: 300, behavior: 'smooth' });
+        }
+    });
+    
+    // Make container focusable for keyboard navigation
+    scrollContainer.setAttribute('tabindex', '0');
+}
+
 // Skill bars animation
 function initSkillBars() {
     const skillBars = document.querySelectorAll('.skill-progress');
@@ -179,26 +503,55 @@ function initSkillBars() {
 
 function animateSkillBar(bar) {
     const targetWidth = bar.dataset.targetWidth;
-    let currentWidth = 0;
-    const increment = targetWidth / 50; // 50 steps for smooth animation
+    const startTime = performance.now();
+    const duration = 1500; // 1.5 seconds for smooth animation
     
-    const animation = setInterval(() => {
-        currentWidth += increment;
-        if (currentWidth >= targetWidth) {
-            currentWidth = targetWidth;
-            clearInterval(animation);
-        }
+    function animate(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        // Easing function for smooth animation
+        const easeOutCubic = 1 - Math.pow(1 - progress, 3);
+        const currentWidth = targetWidth * easeOutCubic;
+        
         bar.style.width = currentWidth + '%';
-    }, 20);
+        
+        if (progress < 1) {
+            requestAnimationFrame(animate);
+        }
+    }
+    
+    requestAnimationFrame(animate);
 }
 
-// Project cards animation
+// Smooth project cards animation
 function animateProjectCard(card) {
-    const delay = Array.from(card.parentNode.children).indexOf(card) * 100;
+    const delay = Array.from(card.parentNode.children).indexOf(card) * 150;
+    const startTime = performance.now();
+    const duration = 800;
     
     setTimeout(() => {
-        card.style.opacity = '1';
-        card.style.transform = 'translateY(0)';
+        function animate(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            // Smooth easing
+            const easeOutCubic = 1 - Math.pow(1 - progress, 3);
+            const translateY = 30 * (1 - easeOutCubic);
+            const scale = 0.95 + (0.05 * easeOutCubic);
+            
+            card.style.opacity = easeOutCubic;
+            card.style.transform = `translateY(${translateY}px) scale(${scale})`;
+            
+            if (progress < 1) {
+                requestAnimationFrame(animate);
+            } else {
+                card.style.willChange = 'auto';
+            }
+        }
+        
+        card.style.willChange = 'opacity, transform';
+        requestAnimationFrame(animate);
     }, delay);
 }
 
@@ -275,15 +628,16 @@ function showNotification(message, type = 'info') {
         transform: translateX(100%);
         transition: transform 0.3s ease;
         max-width: 300px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
+        border: 2px solid #ffffff;
     `;
     
     // Set background color based on type
     const colors = {
-        success: '#10b981',
-        error: '#ef4444',
-        info: '#3b82f6',
-        warning: '#f59e0b'
+        success: '#000000',
+        error: '#000000',
+        info: '#000000',
+        warning: '#000000'
     };
     notification.style.backgroundColor = colors[type] || colors.info;
     
@@ -454,7 +808,8 @@ const loadingStyles = `
     }
     
     .nav-link.active {
-        color: var(--primary-color);
+        color: var(--accent-neon);
+        text-shadow: var(--neon-glow);
     }
     
     .nav-link.active::after {

@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Online Medical Services - Get professional healthcare consultation from the comfort of your home">
+    <meta name="keywords" content="online medical consultation, telemedicine, virtual doctor, healthcare, medical services">
+    
+    <title>MediCare Online - Professional Healthcare Services</title>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="medical-styles.css">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-icon">🏥</span>
+                <span class="logo-text">MediCare Online</span>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#how-it-works" class="nav-link">How It Works</a>
+                <a href="#doctors" class="nav-link">Doctors</a>
+                <a href="#testimonials" class="nav-link">Testimonials</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <div class="nav-actions">
+                <a href="#book-appointment" class="btn btn-primary">Book Appointment</a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-background">
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="title-line">Professional Healthcare</span>
+                    <span class="title-line highlight">At Your Fingertips</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Connect with licensed doctors instantly. Get expert medical consultation, prescriptions, and health advice from the comfort of your home.
+                </p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Expert Doctors</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">50K+</div>
+                        <div class="stat-label">Happy Patients</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">Available</div>
+                    </div>
+                </div>
+                <div class="hero-buttons">
+                    <a href="#book-appointment" class="btn btn-primary btn-large">Book Consultation</a>
+                    <a href="#services" class="btn btn-secondary btn-large">Our Services</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-card">
+                    <div class="card-icon">👨‍⚕️</div>
+                    <h3>Dr. Sarah Johnson</h3>
+                    <p>Cardiologist</p>
+                    <div class="card-rating">
+                        <span>⭐⭐⭐⭐⭐</span>
+                        <span>4.9 (1,234 reviews)</span>
+                    </div>
+                    <a href="#book-appointment" class="card-link">Book Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Services</h2>
+                <p class="section-subtitle">Comprehensive healthcare solutions tailored to your needs</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🩺</div>
+                    <h3>General Consultation</h3>
+                    <p>Get expert advice on common health issues, symptoms, and general wellness from licensed physicians.</p>
+                    <ul class="service-features">
+                        <li>✓ 15-30 min consultation</li>
+                        <li>✓ Prescription available</li>
+                        <li>✓ Follow-up included</li>
+                    </ul>
+                    <div class="service-price">From $29</div>
+                </div>
+                <div class="service-card featured">
+                    <div class="service-badge">Popular</div>
+                    <div class="service-icon">💊</div>
+                    <h3>Prescription Refills</h3>
+                    <p>Renew your prescriptions quickly and safely without visiting a pharmacy in person.</p>
+                    <ul class="service-features">
+                        <li>✓ Same-day processing</li>
+                        <li>✓ E-prescription delivery</li>
+                        <li>✓ Pharmacy integration</li>
+                    </ul>
+                    <div class="service-price">From $19</div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🧠</div>
+                    <h3>Mental Health</h3>
+                    <p>Professional counseling and therapy sessions with certified mental health specialists.</p>
+                    <ul class="service-features">
+                        <li>✓ Confidential sessions</li>
+                        <li>✓ Licensed therapists</li>
+                        <li>✓ Flexible scheduling</li>
+                    </ul>
+                    <div class="service-price">From $49</div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">👶</div>
+                    <h3>Pediatric Care</h3>
+                    <p>Specialized healthcare for children with experienced pediatricians who understand your child's needs.</p>
+                    <ul class="service-features">
+                        <li>✓ Child-friendly approach</li>
+                        <li>✓ Parent consultation</li>
+                        <li>✓ Growth monitoring</li>
+                    </ul>
+                    <div class="service-price">From $39</div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">❤️</div>
+                    <h3>Cardiology</h3>
+                    <p>Expert heart health consultation, ECG interpretation, and cardiovascular disease management.</p>
+                    <ul class="service-features">
+                        <li>✓ Heart health assessment</li>
+                        <li>✓ ECG analysis</li>
+                        <li>✓ Treatment plans</li>
+                    </ul>
+                    <div class="service-price">From $59</div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🔬</div>
+                    <h3>Lab Test Consultation</h3>
+                    <p>Review and interpret your lab results with detailed explanations from medical professionals.</p>
+                    <ul class="service-features">
+                        <li>✓ Result interpretation</li>
+                        <li>✓ Detailed reports</li>
+                        <li>✓ Action plans</li>
+                    </ul>
+                    <div class="service-price">From $35</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">How It Works</h2>
+                <p class="section-subtitle">Get started in three simple steps</p>
+            </div>
+            <div class="steps-container">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">📝</div>
+                    <h3>Book Appointment</h3>
+                    <p>Choose your preferred doctor and time slot. Fill in your basic information and symptoms.</p>
+                </div>
+                <div class="step-connector"></div>
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">💻</div>
+                    <h3>Video Consultation</h3>
+                    <p>Connect with your doctor via secure video call. Discuss your health concerns in detail.</p>
+                </div>
+                <div class="step-connector"></div>
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">📋</div>
+                    <h3>Get Treatment</h3>
+                    <p>Receive prescriptions, treatment plans, and follow-up recommendations directly to your email.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Doctors Section -->
+    <section id="doctors" class="doctors">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Expert Doctors</h2>
+                <p class="section-subtitle">Meet our team of licensed medical professionals</p>
+            </div>
+            <div class="doctors-grid">
+                <div class="doctor-card">
+                    <div class="doctor-image">
+                        <div class="doctor-avatar">👨‍⚕️</div>
+                    </div>
+                    <div class="doctor-info">
+                        <h3>Dr. Michael Chen</h3>
+                        <p class="doctor-specialty">Cardiologist</p>
+                        <div class="doctor-rating">
+                            <span>⭐⭐⭐⭐⭐</span>
+                            <span>4.9</span>
+                        </div>
+                        <p class="doctor-experience">15+ years experience</p>
+                        <a href="#book-appointment" class="doctor-btn">Book Appointment</a>
+                    </div>
+                </div>
+                <div class="doctor-card">
+                    <div class="doctor-image">
+                        <div class="doctor-avatar">👩‍⚕️</div>
+                    </div>
+                    <div class="doctor-info">
+                        <h3>Dr. Emily Rodriguez</h3>
+                        <p class="doctor-specialty">Pediatrician</p>
+                        <div class="doctor-rating">
+                            <span>⭐⭐⭐⭐⭐</span>
+                            <span>4.8</span>
+                        </div>
+                        <p class="doctor-experience">12+ years experience</p>
+                        <a href="#book-appointment" class="doctor-btn">Book Appointment</a>
+                    </div>
+                </div>
+                <div class="doctor-card">
+                    <div class="doctor-image">
+                        <div class="doctor-avatar">👨‍⚕️</div>
+                    </div>
+                    <div class="doctor-info">
+                        <h3>Dr. James Wilson</h3>
+                        <p class="doctor-specialty">General Practitioner</p>
+                        <div class="doctor-rating">
+                            <span>⭐⭐⭐⭐⭐</span>
+                            <span>4.9</span>
+                        </div>
+                        <p class="doctor-experience">20+ years experience</p>
+                        <a href="#book-appointment" class="doctor-btn">Book Appointment</a>
+                    </div>
+                </div>
+                <div class="doctor-card">
+                    <div class="doctor-image">
+                        <div class="doctor-avatar">👩‍⚕️</div>
+                    </div>
+                    <div class="doctor-info">
+                        <h3>Dr. Lisa Thompson</h3>
+                        <p class="doctor-specialty">Mental Health Specialist</p>
+                        <div class="doctor-rating">
+                            <span>⭐⭐⭐⭐⭐</span>
+                            <span>4.7</span>
+                        </div>
+                        <p class="doctor-experience">10+ years experience</p>
+                        <a href="#book-appointment" class="doctor-btn">Book Appointment</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">What Our Patients Say</h2>
+                <p class="section-subtitle">Real experiences from our satisfied patients</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"The convenience of consulting with a doctor from home is amazing. Dr. Chen was thorough and professional. Highly recommend!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">👤</div>
+                        <div class="author-info">
+                            <div class="author-name">John Smith</div>
+                            <div class="author-location">New York, USA</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"I was able to get a prescription refill quickly without leaving my house. The service is fast and reliable."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">👤</div>
+                        <div class="author-info">
+                            <div class="author-name">Maria Garcia</div>
+                            <div class="author-location">Los Angeles, USA</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"The pediatric consultation for my daughter was excellent. Dr. Rodriguez was patient and explained everything clearly."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">👤</div>
+                        <div class="author-info">
+                            <div class="author-name">David Lee</div>
+                            <div class="author-location">Chicago, USA</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Book Appointment Section -->
+    <section id="book-appointment" class="book-appointment">
+        <div class="container">
+            <div class="appointment-wrapper">
+                <div class="appointment-content">
+                    <h2>Book Your Appointment</h2>
+                    <p>Fill out the form below and our team will contact you shortly to confirm your appointment.</p>
+                    <form class="appointment-form" id="appointmentForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" name="name" placeholder="John Doe" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="service">Service Type</label>
+                                <select id="service" name="service" required>
+                                    <option value="">Select a service</option>
+                                    <option value="general">General Consultation</option>
+                                    <option value="prescription">Prescription Refill</option>
+                                    <option value="mental-health">Mental Health</option>
+                                    <option value="pediatric">Pediatric Care</option>
+                                    <option value="cardiology">Cardiology</option>
+                                    <option value="lab-test">Lab Test Consultation</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="symptoms">Symptoms / Reason for Visit</label>
+                            <textarea id="symptoms" name="symptoms" rows="4" placeholder="Please describe your symptoms or reason for consultation..." required></textarea>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="date">Preferred Date</label>
+                                <input type="date" id="date" name="date" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="time">Preferred Time</label>
+                                <select id="time" name="time" required>
+                                    <option value="">Select time</option>
+                                    <option value="09:00">9:00 AM</option>
+                                    <option value="10:00">10:00 AM</option>
+                                    <option value="11:00">11:00 AM</option>
+                                    <option value="12:00">12:00 PM</option>
+                                    <option value="13:00">1:00 PM</option>
+                                    <option value="14:00">2:00 PM</option>
+                                    <option value="15:00">3:00 PM</option>
+                                    <option value="16:00">4:00 PM</option>
+                                    <option value="17:00">5:00 PM</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-large">Book Appointment</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h2>Get In Touch</h2>
+                    <p>Have questions? We're here to help. Reach out to us through any of these channels.</p>
+                    <div class="contact-items">
+                        <div class="contact-item">
+                            <div class="contact-icon">📞</div>
+                            <div class="contact-details">
+                                <h4>Phone</h4>
+                                <p>+1 (555) 123-4567</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">✉️</div>
+                            <div class="contact-details">
+                                <h4>Email</h4>
+                                <p>support@medicareonline.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">📍</div>
+                            <div class="contact-details">
+                                <h4>Address</h4>
+                                <p>123 Healthcare Ave, Medical District, NY 10001</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">🕒</div>
+                            <div class="contact-details">
+                                <h4>Hours</h4>
+                                <p>24/7 Available for Online Consultations</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <span class="logo-icon">🏥</span>
+                        <span class="logo-text">MediCare Online</span>
+                    </div>
+                    <p>Professional healthcare services delivered to your doorstep. Your health is our priority.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#doctors">Doctors</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="#services">General Consultation</a></li>
+                        <li><a href="#services">Prescription Refills</a></li>
+                        <li><a href="#services">Mental Health</a></li>
+                        <li><a href="#services">Pediatric Care</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">HIPAA Compliance</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 MediCare Online. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="medical-script.js"></script>
+</body>
+</html>
+
